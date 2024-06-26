@@ -31,15 +31,20 @@ async function focusActiveLazygitInstance(): Promise<boolean> {
 
 async function newLazygitInstance() {
   // Always create a new terminal
-  let terminal = vscode.window.createTerminal();
+  let terminal = vscode.window.activeTerminal;
+  if (vscode.window.activeTerminal === null) {
+    terminal = vscode.window.createTerminal();
+  }
 
-  terminal.sendText("lazygit && exit");
-  terminal.show();
+  if (terminal) {
+    terminal.sendText("lazygit && exit");
+    terminal.show();
+  }
 
   // Move the terminal to the editor area
-  await vscode.commands.executeCommand(
-    "workbench.action.terminal.moveToEditor"
-  );
+  // await vscode.commands.executeCommand(
+  //   "workbench.action.terminal.moveToEditor"
+  // );
 
   // Move focus back to the editor view
   await vscode.commands.executeCommand(
