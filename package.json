@@ -1,8 +1,8 @@
 {
-  "name": "lazygit",
-  "displayName": "Lazygit for VSCode",
-  "publisher": "ChaitanyaShahare",
-  "description": "",
+  "name": "lazygit-modified",
+  "displayName": "lazygit integrated vscode terminal",
+  "publisher": "rafaelvincent",
+  "description": "lazygit without starting on a fullscreen terminal, fork of Chaitanya-Shahare",
   "version": "1.0.5",
   "repository": {
     "type": "git",

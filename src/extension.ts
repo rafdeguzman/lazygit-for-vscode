@@ -52,6 +52,7 @@ async function newLazygitInstance() {
   //   "workbench.action.focusActiveEditorGroup"
   // );
   // console.log("after workbench focus active");
+  // let terminalCount = vscode.window.terminals.length;
 
   // if (vscode.window.terminals.length > 1) {
   //   // Close the terminal if it's not the only one
