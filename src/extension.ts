@@ -21,7 +21,7 @@ async function openLazygit() {
  */
 async function focusActiveLazygitInstance(): Promise<boolean> {
   for (let openTerminal of vscode.window.terminals) {
-    if (openTerminal.name === "lazygit") {
+    if (openTerminal.name === "LazyGit") {
       openTerminal.show();
       return true;
     }
@@ -31,30 +31,32 @@ async function focusActiveLazygitInstance(): Promise<boolean> {
 
 async function newLazygitInstance() {
   // Always create a new terminal
-  let terminal = vscode.window.activeTerminal;
-  if (vscode.window.activeTerminal === null) {
-    terminal = vscode.window.createTerminal();
-  }
+  let terminal = vscode.window.createTerminal({
+    name: "LazyGit",
+    location: vscode.TerminalLocation.Panel,
+  });
 
-  if (terminal) {
-    terminal.sendText("lazygit && exit");
-    terminal.show();
-  }
-
+  terminal.show();
+  terminal.sendText("lazygit && exit");
+  terminal.show();
   // Move the terminal to the editor area
   // await vscode.commands.executeCommand(
   //   "workbench.action.terminal.moveToEditor"
   // );
 
-  // Move focus back to the editor view
   await vscode.commands.executeCommand(
-    "workbench.action.focusActiveEditorGroup"
+    "workbench.action.terminal.chat.focusInput"
   );
+  // Move focus back to the editor view
+  // await vscode.commands.executeCommand(
+  //   "workbench.action.focusActiveEditorGroup"
+  // );
+  // console.log("after workbench focus active");
 
-  if (vscode.window.terminals.length > 1) {
-    // Close the terminal if it's not the only one
-    await vscode.commands.executeCommand("workbench.action.togglePanel");
-  }
+  // if (vscode.window.terminals.length > 1) {
+  //   // Close the terminal if it's not the only one
+  //   await vscode.commands.executeCommand("workbench.action.togglePanel");
+  // }
 }
 
 export function deactivate() {}
